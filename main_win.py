@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import cv2
-import threading
 import time
 import subprocess as sp
-from address import camera_address, rtsp_address, rtmp_address
+from address import camera_address, rtmp_address
 import multiprocessing as mp
+from play import play
 
 
 # 搭建流媒体服务器
@@ -67,19 +67,6 @@ def operate_stream(camera_path, rtspUrl):
     push_stream(camera_path, rtspUrl)
 
 
-# 播放拉流视频
-def play(win_name, rtspUrl):
-    cap = cv2.VideoCapture(rtspUrl)
-    ret, frame0= cap.read()
-    while ret:
-        ret, frame = cap.read()
-        cv2.imshow(win_name, frame)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-    cv2.destroyAllWindows()
-    cap.release()
-
-
 if __name__ == '__main__':
     # 搭建流媒体服务器
     # thread = threading.Thread(target=stream_server, args=())
@@ -92,36 +79,3 @@ if __name__ == '__main__':
     for process in processes:
         process.start()
         time.sleep(2)
-
-    # 预览窗口
-    '''
-    processes1 = []
-    for camera_path, rtspUrl in zip(camera_address, rtsp_address):
-        processes1.append(mp.Process(target=play, args=(camera_path, rtspUrl)))
-    for process in processes1:
-        process.start()
-    '''
-
-    '''
-    # 多线程
-    threads1 = []
-    for camera_path, rtspUrl in zip(camera_address, rtsp_address):
-        threads1.append(threading.Thread(target=operate_stream, args=(camera_path, rtspUrl,)))
-
-    for thread in threads1:
-        thread.start()
-    threads2 = []
-    for camera_path, rtspUrl in zip(camera_address, rtsp_address):
-        threads2.append(threading.Thread(target=play, args=(camera_path, rtspUrl,)))
-
-    for thread in threads2:
-        thread.start()
-
-    thread1 = threading.Thread(target=operate_stream, name='1', args=(camera_path, rtspUrl, ))
-    thread2 = threading.Thread(target=play, name='2', args=(camera_path, rtspUrl,))
-
-    # 开启线程
-    thread1.start()
-    time.sleep(4)
-    thread2.start()
-    '''
