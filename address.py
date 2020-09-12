@@ -21,7 +21,7 @@ camera_address = [
 ]
 
 # rtmp服务器推流地址
-# 格式为“rtmp://localhost:8088/live//自定义"
+# 格式为“rtmp://服务器地址:1935/live//自定义"
 rtmp_address = [
     "rtmp://39.98.152.171:1935/live/11",
     "rtmp://39.98.152.171:1935/live/12",

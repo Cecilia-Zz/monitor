@@ -4,16 +4,6 @@ import time
 import subprocess as sp
 from address import camera_address, rtmp_address
 import multiprocessing as mp
-from play import play
-
-
-# 搭建流媒体服务器
-def stream_server():
-    # 管道配置
-    # p = sp.Popen('ServiceInstall-easydarwin.exe', shell=True, stdout=sp.PIPE)
-    p = sp.Popen('easydarwin.exe', shell=True, stdout=sp.PIPE)
-    p.stdout.read()
-    time.sleep(3)
 
 
 # opencv取流
@@ -39,20 +29,6 @@ def push_stream(camera_path, pushUrl):
         '-f', 'flv',
         pushUrl
     ]
-    '''
-    # rtsp
-    command = [
-        'ffmpeg',
-        '-rtsp_transport', 'tcp',
-        '-i', camera_path,
-        '-vcodec', 'copy',
-        '-r', '15',
-        '-s', '1080x720',
-        '-an',
-        '-f', 'rtsp',
-        pushUrl
-    ]
-    '''
 
     # 管道配置
     p = sp.Popen(command, stdout=sp.PIPE)
@@ -68,9 +44,6 @@ def operate_stream(camera_path, rtspUrl):
 
 
 if __name__ == '__main__':
-    # 搭建流媒体服务器
-    # thread = threading.Thread(target=stream_server, args=())
-    # thread.start()
 
     # 多进程推流
     processes = []
