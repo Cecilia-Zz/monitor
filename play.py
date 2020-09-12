@@ -15,10 +15,11 @@ def play(win_name, rtspUrl):
     cap.release()
 
 
-# 预览窗口
-pc_play = []
-for camera_path, rtmpUrl in zip(camera_address, rtmp_address):
-    pc_play.append(mp.Process(target=play, args=(camera_path, rtmpUrl)))
-for process in pc_play:
-    process.start()
+if __name__ == '__main__':
+    # 预览推流
+    pc_play = []
+    for camera_path, rtmpUrl in zip(camera_address, rtmp_address):
+        pc_play.append(mp.Process(target=play, args=(camera_path, rtmpUrl)))
+    for process in pc_play:
+        process.start()
 
