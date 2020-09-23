@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # 摄像头地址
-# 格式为“rtsp://用户名:密码@ip地址/Streaming/Channels/通道”
+# 格式为“rtsp://用户名:密码@设备ip地址/Streaming/Channels/通道”
 # 通道可填1-4
 camera_address = [
     "rtsp://admin:Admin123@192.168.9.11/Streaming/Channels/1",
@@ -20,8 +20,8 @@ camera_address = [
     "rtsp://admin:Admin123@192.168.9.25/Streaming/Channels/1"
 ]
 
-# rtmp服务器推流地址
-# 格式为“rtmp://服务器地址:1935/live//自定义"
+# rtmp推流地址
+# 格式为“rtmp://配置好nginx反向代理的服务器地址:1935/live//自定义"
 rtmp_address = [
     "rtmp://39.98.152.171:1935/live/11",
     "rtmp://39.98.152.171:1935/live/12",

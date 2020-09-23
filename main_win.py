@@ -19,7 +19,6 @@ def pull_stream(camera_path):
 # ffmpeg推流
 def push_stream(camera_path, pushUrl):
     # ffmpeg command
-    # rtmp
     command = [
         'ffmpeg',
         '-rtsp_transport', 'tcp',
